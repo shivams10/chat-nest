@@ -1,0 +1,40 @@
+{
+	"name": "chat-nest-server",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"license": "ISC",
+	"author": "Shivam Shukla",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shivams10/chat-nest"
+	},
+	"homepage": "https://github.com/shivams10/chat-nest",
+	"bugs": {
+		"url": "https://github.com/shivams10/chat-nest/issues"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format esm --dts",
+		"dev": "tsup src/index.ts --format esm --watch"
+	},
+	"dependencies": {
+		"chat-nest-core": "*",
+		"express": "^5.2.1",
+		"openai": "^6.16.0"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.6",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	}
+}

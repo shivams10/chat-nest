@@ -1,29 +1,20 @@
 {
-  "name": "chat-nest",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
-  "scripts": {
-    "build": "tsup src/index.ts --dts",
-    "dev": "tsup src/index.ts --watch",
-    "clean": "rm -rf dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Shivam Shukla",
-  "license": "ISC",
-  "description": "",
-  "sideEffects": false,
-  "devDependencies": {
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
-  },
-  "exports": {
-  ".": {
-    "import": "./dist/index.js",
-    "types": "./dist/index.d.ts"
-  }
-}
+	"name": "chat-nest-workspace",
+	"private": true,
+	"workspaces": [
+		"packages/*",
+		"apps/*"
+	],  "scripts": {
+        "build": "npm run build -ws",
+        "dev": "npm run dev -ws",
+    
+        "build:sdk": "npm run build --workspace=chat-nest-sdk",
+        "dev:sdk": "npm run dev --workspace=chat-nest-sdk",
+    
+        "build:server": "npm run build --workspace=chat-nest-server",
+        "dev:server": "npm run dev --workspace=chat-nest-server",
+
+        "build:core": "npm run build --workspace=chat-nest-core",
+        "dev:core": "npm run dev --workspace=chat-nest-core"
+      }    
 }

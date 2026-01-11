@@ -1,0 +1,47 @@
+{
+	"name": "chat-nest-sdk",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"homepage": "https://github.com/shivams10/chat-nest",
+	"bugs": {
+		"url": "https://github.com/shivams10/chat-nest/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shivams10/chat-nest"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format esm --dts --external react --external react-dom",
+		"dev": "tsup src/index.ts --format esm --watch --external react --external react-dom",
+		"clean": "rm -rf dist",	  
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Shivam Shukla",
+	"license": "ISC",
+	"description": "",
+	"sideEffects": false,
+	"devDependencies": {
+		"@types/react": "^19.2.8",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	},
+	"peerDependencies": {
+		"react": ">=18",
+		"react-dom": ">=18"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"dependencies": {
+		"chat-nest-core": "*"
+	}
+}
