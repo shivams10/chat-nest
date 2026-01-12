@@ -138,3 +138,31 @@ npm run lint
 ## 📄 License
 
 ISC
+
+---
+
+## 📦 Packages
+
+This monorepo contains the following published npm packages:
+
+### 🧩 chat-nest-core
+Shared types and contracts used across the platform.
+
+- npm: https://www.npmjs.com/package/chat-nest-core
+- source: https://github.com/shivams10/chat-nest/tree/main/packages/chat-nest-core
+
+---
+
+### ⚛️ chat-nest-sdk
+Frontend React SDK for consuming streaming AI APIs with cancellation and retry safety.
+
+- npm: https://www.npmjs.com/package/chat-nest-sdk
+- source: https://github.com/shivams10/chat-nest/tree/main/packages/chat-nest-sdk
+
+---
+
+### 🖥 chat-nest-server
+Streaming AI backend server with cost controls, rate limiting, and cancellation support.
+
+- npm: https://www.npmjs.com/package/chat-nest-server
+- source: https://github.com/shivams10/chat-nest/tree/main/packages/chat-nest-server
