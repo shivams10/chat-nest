@@ -1,5 +1,6 @@
 {
 	"name": "chat-nest-server",
+	"description": "Streaming AI backend server with cost controls, rate limiting, and cancellation support.",
 	"version": "1.0.0",
 	"type": "module",
 	"main": "dist/index.js",
@@ -8,7 +9,8 @@
 	"types": "dist/index.d.ts",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/shivams10/chat-nest"
+		"url": "git+https://github.com/shivams10/chat-nest.git",
+		"directory": "packages/chat-nest-server"
 	},
 	"homepage": "https://github.com/shivams10/chat-nest",
 	"bugs": {
@@ -36,5 +38,13 @@
 		"@types/express": "^5.0.6",
 		"tsup": "^8.5.1",
 		"typescript": "^5.9.3"
-	}
+	},
+	"keywords": [
+		"ai",
+		"node",
+		"express",
+		"openai",
+		"streaming",
+		"backend"
+	]
 }

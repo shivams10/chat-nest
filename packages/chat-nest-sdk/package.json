@@ -1,5 +1,6 @@
 {
 	"name": "chat-nest-sdk",
+	"description": "Frontend React SDK for consuming streaming AI APIs with cancellation and retry safety.",
 	"version": "1.0.0",
 	"type": "module",
 	"main": "dist/index.js",
@@ -8,23 +9,22 @@
 	"bugs": {
 		"url": "https://github.com/shivams10/chat-nest/issues"
 	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/shivams10/chat-nest"
-	},
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"build": "tsup src/index.ts --format esm --dts --external react --external react-dom",
 		"dev": "tsup src/index.ts --format esm --watch --external react --external react-dom",
-		"clean": "rm -rf dist",	  
+		"clean": "rm -rf dist",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"keywords": [],
 	"author": "Shivam Shukla",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shivams10/chat-nest.git",
+		"directory": "packages/chat-nest-sdk"
+	},
 	"license": "ISC",
-	"description": "",
 	"sideEffects": false,
 	"devDependencies": {
 		"@types/react": "^19.2.8",
@@ -43,5 +43,13 @@
 	},
 	"dependencies": {
 		"chat-nest-core": "*"
-	}
+	},
+	"keywords": [
+		"ai",
+		"react",
+		"sdk",
+		"openai",
+		"streaming",
+		"chatbot"
+	]
 }

@@ -1,31 +1,42 @@
 {
-  "name": "chat-nest-core",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "license": "ISC",
-  "author": "Shivam Shukla",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shivams10/chat-nest"
-  },
-  "homepage": "https://github.com/shivams10/chat-nest",
-  "bugs": {
-    "url": "https://github.com/shivams10/chat-nest/issues"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": ["dist"],
-  "scripts": {
-    "build": "tsup src/index.ts --dts --format esm"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsup": "^8.5.1"
-  }
+	"name": "chat-nest-core",
+	"description": "Shared types and contracts for the Chat Nest AI platform.",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"license": "ISC",
+	"author": "Shivam Shukla",
+	"keywords": [
+		"ai",
+		"typescript",
+		"sdk",
+		"contracts",
+		"types"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shivams10/chat-nest.git",
+		"directory": "packages/chat-nest-core"
+	},
+	"homepage": "https://github.com/shivams10/chat-nest",
+	"bugs": {
+		"url": "https://github.com/shivams10/chat-nest/issues"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --dts --format esm"
+	},
+	"devDependencies": {
+		"typescript": "^5.9.3",
+		"tsup": "^8.5.1"
+	}
 }
