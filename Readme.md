@@ -1,5 +1,7 @@
 ![License](https://img.shields.io/badge/license-ISC-blue)
+![TypeScript](https://img.shields.io/badge/typescript-5.x-blue)
 ![Node](https://img.shields.io/badge/node-18%2B-green)
+![npm](https://img.shields.io/npm/v/chat-nest-sdk)
 
 # Chat Nest
 
