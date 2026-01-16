@@ -13,7 +13,8 @@ Chat Nest is designed for teams who want to integrate AI chat experiences quickl
 
 ## ✨ Features
 
-- Streaming AI responses
+- Server-Side Events (SSE) for streaming AI responses
+- Real-time token streaming via SSE protocol
 - End-to-end cancellation propagation
 - Intelligent retry handling
 - Daily budget enforcement
@@ -43,11 +44,13 @@ packages/
 
 UI (React)
    ↓
-chat-nest-sdk
+chat-nest-sdk (SSE client)
    ↓
-chat-nest-server
+chat-nest-server (SSE streaming)
    ↓
 OpenAI API
+
+**Communication**: All streaming communication uses Server-Side Events (SSE) protocol for efficient real-time token delivery.
 
 ---
 
