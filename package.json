@@ -6,7 +6,7 @@
 		"apps/*"
 	],  "scripts": {
         "build": "npm run build -ws",
-        "dev": "npm run dev -ws",
+        "dev": "npm run dev --workspace=demo",
     
         "build:sdk": "npm run build --workspace=chat-nest-sdk",
         "dev:sdk": "npm run dev --workspace=chat-nest-sdk",
