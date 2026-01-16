@@ -1,26 +1,29 @@
 # chat-nest-sdk
 
-> Frontend SDK for Chat Nest providing a simple React hook to consume streaming AI APIs safely.
+> Frontend SDK for Chat Nest providing a simple React hook to consume streaming AI APIs safely using Server-Side Events (SSE).
 
 This package handles:
-- Streaming response handling
+- Server-Side Events (SSE) streaming response handling
+- Real-time token streaming via SSE protocol
 - Cancellation propagation
 - Intelligent retry behavior
 - Error normalization
 - Message state management
 
-Designed for production usage in React applications.
+Designed for production usage in React applications. Uses SSE for efficient, bidirectional communication with the backend.
 
 ---
 
 ## ✨ Features
 
-- Streaming token handling
+- Server-Side Events (SSE) streaming protocol
+- Real-time token streaming via SSE events
 - Abort-safe cancellation
 - Retry only on network / server failures
 - No retries on client or policy errors
 - Message state management
 - Lightweight and framework-friendly
+- Efficient SSE event parsing (`token`, `done`, `error`, `ping`, `start` events)
 
 ---
 
@@ -95,6 +98,8 @@ Cancel immediately stops streaming and billing.
 4xx errors are never retried.
 
 Network failures retry automatically.
+
+**Server-Side Events (SSE)**: The SDK communicates with the backend using the SSE protocol. The backend must send events in SSE format (`event: <type>\ndata: <data>\n\n`). Supported event types: `start`, `token`, `done`, `error`, `ping`.
 
 ---
 
