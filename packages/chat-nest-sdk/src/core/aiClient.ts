@@ -3,14 +3,14 @@ import type {
 	StreamCallbacks,
 	AIClient,
 	AiClientConfig,
+	AiUsageProfile,
+	ChatRequestOptions,
 } from 'chat-nest-core';
+import { getSystemPromptForProfile } from './promptPresets.js';
 
 const DEFAULT_TIMEOUT = 30_000; // 30s
 const DEFAULT_RETRIES = 2;
 
-/**
- * Errors that must NEVER be retried (4xx, policy, validation, etc)
- */
 class NonRetryableError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -33,13 +33,15 @@ export class FetchAiClient implements AIClient {
 
 	async streamChat(
 		messages: Message[],
-		callbacks: StreamCallbacks
+		callbacks: StreamCallbacks,
+		profile: AiUsageProfile,
+		options?: ChatRequestOptions
 	): Promise<void> {
 		let attempt = 0;
 
 		while (attempt <= this.config.maxRetries) {
 			try {
-				await this.executeStream(messages, callbacks);
+				await this.executeStream(messages, callbacks, profile, options);
 				return;
 			} catch (error) {
 				if ((error as any)?.name === 'AbortError') {
@@ -67,7 +69,12 @@ export class FetchAiClient implements AIClient {
 		this.abortController?.abort();
 	}
 
-	private async executeStream(messages: Message[], callbacks: StreamCallbacks) {
+	private async executeStream(
+		messages: Message[],
+		callbacks: StreamCallbacks,
+		profile: AiUsageProfile,
+		options?: ChatRequestOptions
+	) {
 		this.abortController = new AbortController();
 
 		const timeoutId = setTimeout(
@@ -85,7 +92,17 @@ export class FetchAiClient implements AIClient {
 					...this.config.headers,
 				},
 				signal: this.abortController.signal,
-				body: JSON.stringify({ messages }),
+				body: JSON.stringify({
+					messages,
+					profile,
+					systemPrompt: getSystemPromptForProfile(profile),
+					...(options?.dailyTokenLimit != null && {
+						dailyTokenLimit: options.dailyTokenLimit,
+					}),
+					...(options?.maxTokensPerRequest != null && {
+						maxTokensPerRequest: options.maxTokensPerRequest,
+					}),
+				}),
 			});
 
 			if (!response.ok) {
