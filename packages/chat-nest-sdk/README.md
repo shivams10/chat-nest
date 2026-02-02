@@ -45,6 +45,9 @@ import { useAiChat } from "chat-nest-sdk";
 function App() {
   const chat = useAiChat({
     endpoint: "http://localhost:3001/api/chat",
+    initialProfile: "balanced",
+    dailyTokenLimit: 50_000,    // optional: cap daily tokens
+    maxTokensPerRequest: 4096,  // optional: cap per request
   });
 
   return (
@@ -64,6 +67,11 @@ function App() {
       <button onClick={chat.cancel}>
         Cancel
       </button>
+      <select value={chat.profile} onChange={(e) => chat.setProfile(e.target.value)}>
+        <option value="constrained">Constrained</option>
+        <option value="balanced">Balanced</option>
+        <option value="expanded">Expanded</option>
+      </select>
     </>
   );
 }
@@ -75,17 +83,27 @@ function App() {
 
 ### useAiChat(options)
 
-| Field    | Type   | Description          |
-| -------- | ------ | -------------------- |
-| endpoint | string | Backend API endpoint |
+| Field               | Type   | Description                                                                 |
+| ------------------- | ------ | --------------------------------------------------------------------------- |
+| endpoint            | string | Backend API endpoint                                                        |
+| initialMessages     | Message[] | Optional. Initial messages                                              |
+| maxMessages         | number | Optional. Max messages to keep in context (default 10)                      |
+| initialProfile      | AiUsageProfile | Optional. Profile: `constrained`, `balanced`, `expanded`              |
+| dailyTokenLimit     | number | Optional. Cap daily tokens; server applies min(profile limit, this)        |
+| maxTokensPerRequest | number | Optional. Cap tokens per request (input + output); server applies min      |
 
-| Field             | Description              |
-| ----------------- | ------------------------ |
-| messages          | Chat message list        |
-| sendMessage(text) | Sends user message       |
-| cancel()          | Cancels active request   |
-| isStreaming       | Whether stream is active |
-| error             | Last error               |
+### Return value
+
+| Field             | Description                   |
+| ----------------- | ----------------------------- |
+| messages          | Chat message list             |
+| sendMessage(text) | Sends user message            |
+| cancel()          | Cancels active request        |
+| isStreaming       | Whether stream is active      |
+| error             | Last error                    |
+| profile           | Current profile               |
+| setProfile(p)     | Set profile; persisted to localStorage |
+| reset()           | Reset messages and error      |
 
 ---
 

@@ -99,31 +99,40 @@ import { useAiChat } from "chat-nest-sdk";
 
 const chat = useAiChat({
   endpoint: "http://localhost:3001/api/chat",
+  initialProfile: "balanced",
+  dailyTokenLimit: 50_000,   // optional cap
+  maxTokensPerRequest: 4096, // optional cap
 });
 
 chat.sendMessage("Hello AI");
 chat.cancel();
+chat.profile;    // current profile
+chat.setProfile("expanded");
 ```
 
 ---
 
 ## 💰 Cost Controls
 
-```
 Chat Nest includes built-in safety mechanisms:
 
-Maximum tokens per request
-
-Daily token budget enforcement
-
-Rate limiting
-
-Intelligent retry handling
-
-Abort-safe streaming cancellation
+- **Maximum tokens per request** – Profile-based and client-overridable
+- **Daily token budget enforcement** – Per profile, client can cap lower
+- **Rate limiting** – Per profile
+- **Intelligent retry handling** – No retries on policy/client errors
+- **Abort-safe streaming cancellation** – Stops billing immediately
 
 These guardrails prevent unexpected API costs and runaway usage.
-```
+
+### Customizable profiles (SDK + server)
+
+Three usage profiles control limits: `constrained`, `balanced`, `expanded`. The SDK and server support:
+
+- **Profile selection** – `aiUsageProfile` / `profile` sent with each request
+- **dailyTokenLimit** – Client can cap daily tokens (server applies `min(profile limit, client value)`)
+- **maxTokensPerRequest** – Client can cap per-request tokens (input + output)
+
+See [chat-nest-sdk](packages/chat-nest-sdk/README.md) and [chat-nest-server](packages/chat-nest-server/README.md) for options.
 
 ---
 
