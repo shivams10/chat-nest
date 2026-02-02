@@ -69,7 +69,7 @@ export const PROFILES: Record<AIUsageProfileType, ProfileLimits> = {
 		maxMessages: 12,
 		temperature: 0.8,
 		dailyTokenLimit: 200_000,
-		maxTokensPerRequest: DEFAULT_MAX_TOKENS_PER_REQUEST,
+		maxTokensPerRequest: 12_000, // input (~9k) + output (3k) for 12 msgs
 		rateLimit: { windowMs: 60_000, maxRequests: 60 },
 	}),
 } as const;

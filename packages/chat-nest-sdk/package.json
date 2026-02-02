@@ -1,7 +1,7 @@
 {
 	"name": "chat-nest-sdk",
 	"description": "Frontend React SDK for consuming streaming AI APIs with cancellation and retry safety.",
-	"version": "1.1.0",
+	"version": "1.1.2",
 	"type": "module",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",

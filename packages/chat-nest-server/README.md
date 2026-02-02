@@ -78,11 +78,20 @@ The handler sends SSE-formatted events:
 
 Profiles (`constrained`, `balanced`, `expanded`) control limits. HARD_CAPS clamp all profiles. Server enforces:
 
-- Maximum tokens per request (profile + HARD_CAPS)
-- Daily token limit (profile)
+- **Maximum tokens per request** – Profile-based; client can override via `maxTokensPerRequest` (server applies `min(profile limit, client value)`)
+- **Daily token limit** – Profile-based; client can override via `dailyTokenLimit` (same `min` rule)
 - Request rate limiting (profile)
 - Prompt size trimming (profile)
 - Retry classification
+
+### Request body options
+
+| Field               | Type   | Description                                                                 |
+| ------------------- | ------ | --------------------------------------------------------------------------- |
+| `messages`          | array  | Chat messages (required)                                                    |
+| `profile` / `aiUsageProfile` | string | Profile: `constrained`, `balanced`, `expanded` (legacy: `budget`, `moderate`, `free`) |
+| `dailyTokenLimit`   | number | Optional. Cap daily tokens; server uses `min(profile limit, this)`          |
+| `maxTokensPerRequest` | number | Optional. Cap tokens per request; server uses `min(profile limit, this)`  |
 
 This prevents accidental overspending and abuse.
 
