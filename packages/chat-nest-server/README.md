@@ -5,7 +5,7 @@
 This package exposes an Express-compatible request handler that:
 - Streams AI responses using Server-Side Events (SSE)
 - Sends real-time tokens via SSE protocol
-- Enforces rate limits and budgets
+- Enforces rate limits and profile-based limits
 - Supports abort propagation
 - Protects against runaway usage
 
@@ -18,7 +18,7 @@ This package exposes an Express-compatible request handler that:
 - SSE event types: `start`, `token`, `done`, `error`, `ping`
 - Heartbeat pings to keep connection alive
 - End-to-end cancellation support
-- Daily token budget enforcement
+- Daily token limit enforcement (profile-based)
 - Rate limiting
 - Message trimming
 - Safe retry semantics
@@ -76,12 +76,12 @@ The handler sends SSE-formatted events:
 
 ## 💰 Cost Controls
 
-The server enforces:
+Profiles (`constrained`, `balanced`, `expanded`) control limits. HARD_CAPS clamp all profiles. Server enforces:
 
-- Maximum tokens per request
-- Daily token budget
-- Request rate limiting
-- Prompt size trimming
+- Maximum tokens per request (profile + HARD_CAPS)
+- Daily token limit (profile)
+- Request rate limiting (profile)
+- Prompt size trimming (profile)
 - Retry classification
 
 This prevents accidental overspending and abuse.
@@ -101,11 +101,9 @@ SSE provides better efficiency and real-time streaming compared to traditional p
 ---
 
 ## ⚙ Configuration
-Limits can be customized in:
 
-src/config/
-  aiLimits.ts
-  budget.ts
+- **`config/profiles.ts`** – AI usage profiles (`constrained`, `balanced`, `expanded`), HARD_CAPS, and `resolveProfile()`. Frontend may send `aiUsageProfile` string; backend resolves safely.
+- **`config/aiLimits.ts`** – `AI_MODEL` only. All limits come from profiles.
 
 ---
 
